@@ -1,3 +1,4 @@
 <Solution>
-  <Project Path="EdmontonEvents/EdmontonEvents.csproj" />
+  <Project Path="EdmontonEvents.Data/EdmontonEvents.Data.csproj" Id="03ecdcf0-812a-4a30-bc0e-6b055d3f6aca" />
+  <Project Path="EdmontonEvents/EdmontonEvents.Web.csproj" />
 </Solution>
