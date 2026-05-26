@@ -1,8 +1,139 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="position-relative overflow-hidden" style="background-color: var(--dark-teal);">
+    <img src="~/imgs/skyline.jpg" alt="Edmonton Skyline" class="w-100 opacity-50" style="max-height: 460px; object-fit: cover;" />
+    <div class="w-100 h-100 d-flex align-items-center">
+        <div class="container py-5">
+            <div class="col-lg-7 text-vanilla-cream">
+                <h1 class="text-uppercase fw-bold mb-2" style="letter-spacing: .12rem; color: var(--celadon);">Discover Edmonton</h1>
+                <h3 class="display-4 fw-bold mb-3">Find local events happening around the city.</h3>
+                <p class="lead mb-4">Browse festivals, markets, concerts, workshops, and community gatherings in one place.</p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a class="btn btn-lg fw-semibold" href="#featured-events" style="background-color: var(--celadon); color: var(--dark-teal);">Explore Events</a>
+                    <a class="btn btn-lg btn-outline-light" href="#submit-event">Submit an Event</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-4" style="background-color: var(--vanilla-cream);">
+    <div class="container">
+        <div class="row g-3 align-items-end">
+            <div class="col-md-5">
+                <label for="eventSearch" class="form-label fw-semibold text-dark-teal">Search events</label>
+                <input id="eventSearch" type="search" class="form-control form-control-lg" placeholder="Concerts, markets, family events..." />
+            </div>
+            <div class="col-md-3">
+                <label for="eventDate" class="form-label fw-semibold text-dark-teal">Date</label>
+                <input id="eventDate" type="date" class="form-control form-control-lg" />
+            </div>
+            <div class="col-md-3">
+                <label for="eventCategory" class="form-label fw-semibold text-dark-teal">Category</label>
+                <select id="eventCategory" class="form-select form-select-lg">
+                    <option selected>All categories</option>
+                    <option>Arts and culture</option>
+                    <option>Food and drink</option>
+                    <option>Music</option>
+                    <option>Sports</option>
+                </select>
+            </div>
+            <div class="col-md-1 d-grid">
+                <button class="btn btn-lg fw-semibold" type="button" style="background-color: var(--sea-green); color: white;">Go</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="featured-events" class="py-5">
+    <div class="container">
+        <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+            <div>
+                <p class="text-uppercase fw-semibold mb-1" style="letter-spacing: .1rem; color: var(--sea-green);">What's on</p>
+                <h2 class="fw-bold text-dark-teal mb-0">Featured events</h2>
+            </div>
+            <a href="#" class="fw-semibold text-sea-green">View all events</a>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <article class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <span class="badge rounded-pill mb-3" style="background-color: var(--tea-green); color: var(--dark-teal);">Festival</span>
+                        <h3 class="h5 text-dark-teal">Summer street festival</h3>
+                        <p class="text-muted mb-4">A placeholder card for a highlighted local event with a short description.</p>
+                        <div class="small fw-semibold text-sea-green">June 14 · Downtown</div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-md-4">
+                <article class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <span class="badge rounded-pill mb-3" style="background-color: var(--tea-green); color: var(--dark-teal);">Market</span>
+                        <h3 class="h5 text-dark-teal">Weekend makers market</h3>
+                        <p class="text-muted mb-4">A placeholder card for markets, pop-ups, and community shopping events.</p>
+                        <div class="small fw-semibold text-sea-green">June 21 · Old Strathcona</div>
+                    </div>
+                </article>
+            </div>
+            <div class="col-md-4">
+                <article class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <span class="badge rounded-pill mb-3" style="background-color: var(--tea-green); color: var(--dark-teal);">Music</span>
+                        <h3 class="h5 text-dark-teal">Live music in the park</h3>
+                        <p class="text-muted mb-4">A placeholder card for concerts, open mics, and outdoor performances.</p>
+                        <div class="small fw-semibold text-sea-green">June 28 · Hawrelak Park</div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5" style="background-color: var(--tea-green);">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-md-3">
+                <div class="p-4 rounded-3 bg-white h-100">
+                    <div class="display-6 fw-bold text-sea-green">120+</div>
+                    <p class="mb-0 text-dark-teal">Events listed</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-4 rounded-3 bg-white h-100">
+                    <div class="display-6 fw-bold text-sea-green">30</div>
+                    <p class="mb-0 text-dark-teal">Neighbourhoods</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-4 rounded-3 bg-white h-100">
+                    <div class="display-6 fw-bold text-sea-green">8</div>
+                    <p class="mb-0 text-dark-teal">Categories</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-4 rounded-3 bg-white h-100">
+                    <div class="display-6 fw-bold text-sea-green">Free</div>
+                    <p class="mb-0 text-dark-teal">Community listings</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="submit-event" class="py-5" style="background-color: var(--dark-teal);">
+    <div class="container">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-8 text-vanilla-cream">
+                <p class="text-uppercase fw-semibold mb-2" style="letter-spacing: .1rem; color: var(--celadon);">For organizers</p>
+                <h2 class="fw-bold mb-2">Have an event to share?</h2>
+                <p class="lead mb-0">Add a simple call-to-action here for submitting community events once that flow is ready.</p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a href="#" class="btn btn-lg fw-semibold" style="background-color: var(--vanilla-cream); color: var(--dark-teal);">Start a Listing</a>
+            </div>
+        </div>
+    </div>
+</section>
