@@ -5,46 +5,57 @@
     ViewData["Title"] = "Log in";
 }
 
-<h1>@ViewData["Title"]</h1>
-<div class="container">
-    <div class="row">
-        <section>
-            <form id="account" class="w-50 mx-auto" method="post">
-                <h2>Use a local account to log in.</h2>
-                <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true"/>
-                    <label asp-for="Input.Email" class="form-label">Email</label>
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+<div class="auth-page">
+    <div class="container px-3">
+        <div class="auth-card row g-0 overflow-hidden rounded-4">
+            <div class="col-lg-6 order-lg-1 order-2">
+                <div class="auth-card-form">
+                    <p class="auth-eyebrow mb-0">Welcome back</p>
+                    <h1 class="auth-title">Log in</h1>
+                    <p class="auth-subtitle">Sign in to save events and manage your listings.</p>
+
+                    <form id="account" method="post" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2" role="alert"></div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Email"
+                                   class="form-control form-control-lg"
+                                   autocomplete="username"
+                                   aria-required="true"
+                                   placeholder="name@example.com" />
+                            <label asp-for="Input.Email">Email</label>
+                            <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mb-4">
+                            <input asp-for="Input.Password"
+                                   class="form-control form-control-lg"
+                                   autocomplete="current-password"
+                                   aria-required="true"
+                                   placeholder="Password" />
+                            <label asp-for="Input.Password">Password</label>
+                            <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                        </div>
+
+                        <button id="login-submit" type="submit" class="btn btn-brand btn-lg w-100">
+                            Log in
+                        </button>
+
+                        <div class="auth-links d-flex flex-column flex-sm-row flex-wrap gap-2 gap-sm-4">
+                            <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Dont have an account? Sign Up!</a>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
-                    <label asp-for="Input.Password" class="form-label">Password</label>
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                @* <div class="checkbox mb-3">
-                    <label asp-for="Input.RememberMe" class="form-label">
-                        <input class="form-check-input" asp-for="Input.RememberMe" />
-                        @Html.DisplayNameFor(m => m.Input.RememberMe)
-                    </label>
-                </div> *@
-                <div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
-                </div>
-                <div>
-                    <p>
-                        <a id="forgot-password" class="" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                    @* <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                    </p> *@
-                </div>
-            </form>
-        </section>
+            </div>
+
+            <div class="col-lg-6 order-lg-2 order-1 auth-card-visual">
+                <img src="~/imgs/login.jpg"
+                     alt="Alberta Legislature grounds in Edmonton"
+                     class="auth-card-image" />
+                <div class="auth-card-visual-overlay" aria-hidden="true"></div>                
+            </div>
+        </div>
     </div>
 </div>
 
