@@ -1,3 +1,77 @@
+:root {
+    --dark-teal: #114b5fff;
+    --sky-surge: #5db7deff;
+    --sea-green: #1a936fff;
+    --celadon: #88d498ff;
+    --tea-green: #c6dabfff;
+    --vanilla-cream: #f3e9d2ff;
+}
+
+/* Text color utility classes based on root color variables */
+.text-sky-surge {
+    color: var(--sky-surge) !important;
+}
+.text-dark-teal { 
+    color: var(--dark-teal) !important; 
+}
+.text-sea-green { 
+    color: var(--sea-green) !important; 
+}
+.text-celadon { 
+    color: var(--celadon) !important;
+}
+.text-tea-green { 
+    color: var(--tea-green) !important; 
+}
+.text-vanilla-cream { 
+    color: var(--vanilla-cream) !important; 
+}
+
+.site-navbar {
+    background-color: var(--dark-teal);
+    border-bottom: 4px solid var(--sea-green);
+    box-shadow: 0 .5rem 1rem rgba(17, 75, 95, .18);
+}
+
+.site-navbar .navbar-brand {
+    color: var(--vanilla-cream) !important;
+    font-weight: 700;
+    letter-spacing: .02rem;
+}
+
+.site-navbar .navbar-brand:hover,
+.site-navbar .navbar-brand:focus {
+    color: var(--celadon) !important;
+}
+
+.site-navbar .nav-link {
+    color: var(--tea-green) !important;
+    border-radius: 999px;
+    font-weight: 600;
+    padding-inline: .9rem;
+}
+
+.site-navbar .nav-link:hover,
+.site-navbar .nav-link:focus {
+    background-color: var(--celadon);
+    color: var(--dark-teal) !important;
+}
+
+.site-navbar .btn-link.nav-link {
+    text-decoration: none;
+}
+
+.site-navbar .navbar-toggler {
+    border-color: var(--celadon);
+}
+
+
+* {
+    margin: 0;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
 html {
   font-size: 14px;
 }
@@ -18,7 +92,31 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--vanilla-cream);
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.site-footer {
+  flex-shrink: 0;
+  background-color: var(--dark-teal);
+  border-top: 4px solid var(--sea-green);
+  color: var(--vanilla-cream);
+}
+
+.site-footer a {
+  color: var(--celadon);
+  font-weight: 600;
+}
+
+.site-footer a:hover,
+.site-footer a:focus {
+  color: var(--tea-green);
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
