@@ -1,10 +1,11 @@
 ﻿using EdmontonEvents.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace EdmontonEvents.Data;
 
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext(options)
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<UserAccount>(options)
 {
     public DbSet<Event> Events => Set<Event>();
     public DbSet<Category> Categories => Set<Category>();
@@ -13,6 +14,8 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+        builder.Entity<UserAccount>().ToTable("Users");
+        builder.Entity<IdentityRole>().ToTable("Roles");
 
         builder.Entity<Event>(entity =>
         {
