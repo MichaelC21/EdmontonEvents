@@ -1,4 +1,5 @@
 using EdmontonEvents.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -10,7 +11,6 @@ namespace EdmontonEvents.Controllers
         {
             return View();
         }
-
         public IActionResult Privacy()
         {
             return View();

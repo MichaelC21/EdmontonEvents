@@ -14,17 +14,20 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using EdmontonEvents.Data.Entities;
 
 namespace EdmontonEvents.Web.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<UserAccount> _signInManager;
+        private readonly UserManager<UserAccount> _userManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<UserAccount> signInManager, UserManager<UserAccount> userManager, ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
             _logger = logger;
         }
 
@@ -117,6 +120,34 @@ namespace EdmontonEvents.Web.Areas.Identity.Pages.Account
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
+
+                // Log the generic sign-in result to help diagnose failures
+                _logger.LogInformation("SignInResult: Succeeded={Succeeded}, IsLockedOut={IsLockedOut}, RequiresTwoFactor={RequiresTwoFactor}, IsNotAllowed={IsNotAllowed}",
+                    result.Succeeded, result.IsLockedOut, result.RequiresTwoFactor, result.IsNotAllowed);
+
+                // If sign-in failed, try to get the user record and log/handle relevant properties
+                try
+                {
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    if (user != null)
+                    {
+                        _logger.LogInformation("User {UserId} properties: EmailConfirmed={EmailConfirmed}, IsActive={IsActive}, LockoutEnabled={LockoutEnabled}, LockoutEnd={LockoutEnd}, TwoFactorEnabled={TwoFactorEnabled}",
+                            user.Id, user.EmailConfirmed, (user as EdmontonEvents.Data.Entities.UserAccount)?.IsActive, user.LockoutEnabled, user.LockoutEnd, user.TwoFactorEnabled);
+
+                        // Handle custom IsActive flag - common source of unexpected rejections
+                        var customUser = user as EdmontonEvents.Data.Entities.UserAccount;
+                        if (customUser != null && !customUser.IsActive)
+                        {
+                            ModelState.AddModelError(string.Empty, "Your account is not active. Contact the site administrator.");
+                            return Page();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning(ex, "Failed to inspect user properties after sign-in failure.");
+                }
+
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
@@ -128,6 +159,13 @@ namespace EdmontonEvents.Web.Areas.Identity.Pages.Account
                 }
                 else
                 {
+                    if (result.IsNotAllowed)
+                    {
+                        // Commonly indicates email confirmation required or similar restrictions
+                        ModelState.AddModelError(string.Empty, "Sign-in is not allowed for this account. Ensure your email is confirmed or contact the administrator.");
+                        return Page();
+                    }
+
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return Page();
                 }
