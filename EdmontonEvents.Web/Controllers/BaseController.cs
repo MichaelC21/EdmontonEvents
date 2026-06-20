@@ -8,17 +8,17 @@ namespace EdmontonEvents.Web.Controllers
 {
     public class BaseController : Controller
     {
-        protected ApplicationDbContext Context { get; }
-        protected IUserService UserService { get; }
+        protected readonly ApplicationDbContext Context;
+        protected readonly IUserService UserService;
         public BaseController(ApplicationDbContext context, IUserService userService)
         {
             Context = context;
             UserService = userService;
         }
 
-        protected UserAccount? GetCurrentUserAccount()
+        protected async Task<UserAccount?> GetCurrentUserAccount()
         {
-            return UserService.GetUserAccountByName(User.Identity.Name);
+            return await UserService.GetUserAccountByUserName(User.Identity.Name);
         }
     }
 }

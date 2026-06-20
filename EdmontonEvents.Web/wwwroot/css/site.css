@@ -17,9 +17,7 @@ html {
     font-size: 14px;
     min-height: 100%;
 }
-/*html {
-    position: relative;
-}*/
+
 body {
     min-height: 100vh;
     display: flex;
@@ -29,6 +27,16 @@ body {
 
 main {
     flex: 1 0 auto;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 /* Text color utility classes based on root color variables */
@@ -122,10 +130,10 @@ main {
 }
 
 .btn-brand {
-  background-color: var(--celadon);
+  background-color: var(--sea-green);
   border: none;
   border-radius: .65rem;
-  color: var(--dark-teal);
+  color: #fff;
   font-size: 1.05rem;
   font-weight: 600;
   padding-block: .75rem;
@@ -134,8 +142,8 @@ main {
 
 .btn-brand:hover,
 .btn-brand:focus {
-  background-color: var(--tea-green);
-  color: var(--dark-teal);
+  background-color: var(--celadon);
+  color: #fff;
   transform: translateY(-1px);
 }
 
@@ -143,7 +151,10 @@ main {
   transform: translateY(0);
 }
 
-
+.required-input {
+    font-weight: bold;
+    color: #000 !important;
+}
 
 @media (min-width: 768px) {
     html {

@@ -11,6 +11,6 @@ namespace EdmontonEvents.Data.Entities
         public string LastName { get; set; }
         public string Email { get; set; }
         public bool IsActive { get; set; } = false;
-
+        public string? PostalCode { get; set; }
     }
 }
