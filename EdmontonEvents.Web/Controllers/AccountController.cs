@@ -10,8 +10,8 @@ namespace EdmontonEvents.Web.Controllers
 {
     public class AccountController : BaseController
     {
-        public AccountController(ApplicationDbContext context, IUserService userService, UserManager<UserAccount> userManager)
-            : base(context, userService, userManager)
+        public AccountController(ApplicationDbContext context, IUserService userService)
+            : base(context, userService)
         {
         }
 

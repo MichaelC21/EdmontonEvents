@@ -7,6 +7,6 @@ namespace EdmontonEvents.Data.Services
 {
     public interface IUserService
     {
-        UserAccount GetUserAccountByID(string id);
+        UserAccount? GetUserAccountByName(string name);
     }
 }

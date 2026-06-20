@@ -10,23 +10,15 @@ namespace EdmontonEvents.Web.Controllers
     {
         protected ApplicationDbContext Context { get; }
         protected IUserService UserService { get; }
-        protected UserManager<UserAccount> UserManager { get; }
-        public BaseController(ApplicationDbContext context, IUserService userService, UserManager<UserAccount> userManager)
+        public BaseController(ApplicationDbContext context, IUserService userService)
         {
             Context = context;
             UserService = userService;
-            UserManager = userManager;
         }
 
         protected UserAccount? GetCurrentUserAccount()
         {
-            var id = UserManager.GetUserId(User);
-            if (id == null)
-            {
-                return null;
-            }
-
-            return UserService.GetUserAccountByID(id);
+            return UserService.GetUserAccountByName(User.Identity.Name);
         }
     }
 }

@@ -5,6 +5,11 @@
     ViewData["Title"] = "Sign up";
 }
 
+@section styles {
+    <link rel="stylesheet" type="text/css" href="~/css/auth.css" asp-append-version="true" />
+}
+
+
 <div class="auth-page">
     <div class="container px-3">
         <div class="auth-card row g-0 overflow-hidden rounded-4">
@@ -31,7 +36,7 @@
                                 <div class="form-floating mb-3">
                                     <input asp-for="Input.LastName"
                                            class="form-control form-control-lg"
-                                           autocomplete="family-name" 
+                                           autocomplete="family-name"
                                            aria-required="true" />
                                     <label asp-for="Input.LastName">Last Name</label>
                                     <span asp-validation-for="Input.LastName" class="text-danger small"></span>

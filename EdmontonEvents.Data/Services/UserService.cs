@@ -13,9 +13,9 @@ namespace EdmontonEvents.Data.Services
             _context = context;
         }
 
-        public UserAccount GetUserAccountByID(string id)
+        public UserAccount? GetUserAccountByName(string name)
         {
-            return _context.UserAccounts.First(u => u.Id == id);
+            return _context.UserAccounts.FirstOrDefault(u => u.Email.Trim().ToLower() == name.Trim().ToLower() && u.IsActive == true);
         }
 
     }
