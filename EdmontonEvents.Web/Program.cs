@@ -1,5 +1,6 @@
 using EdmontonEvents.Data;
 using EdmontonEvents.Data.Entities;
+using EdmontonEvents.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<UserAccount>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddTransient<IUserService, UserService>();
 
 builder.Services.AddControllersWithViews();
 
@@ -37,10 +40,20 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
+
+//Map Controller Routes
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
+
+app.MapControllerRoute(
+    name: "Accounts",
+
+    pattern: "{controller=Account}/{action=Dashboard}")
+    .WithStaticAssets();
+
+
 
 app.MapRazorPages()
    .WithStaticAssets();

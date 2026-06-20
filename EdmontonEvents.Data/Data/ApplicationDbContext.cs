@@ -10,6 +10,8 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<Event> Events => Set<Event>();
     public DbSet<Category> Categories => Set<Category>();
     public DbSet<Location> Locations => Set<Location>();
+    public DbSet<UserAccount> UserAccounts => Set<UserAccount>();
+
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
