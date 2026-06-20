@@ -1,0 +1,49 @@
+﻿using EdmontonEvents.Data.Entities;
+using System.ComponentModel.DataAnnotations;
+
+namespace EdmontonEvents.Web.Models
+{
+    public class ProfileDTO
+    {
+        public ProfileDTO()
+        {
+        }
+
+        public ProfileDTO(UserAccount user)
+        {
+            FirstName = user.FirstName;
+            LastName = user.LastName;
+            Email = user.Email;
+            PhoneNumber = user.PhoneNumber ?? "";
+            PostalCode = user.PostalCode ?? "";
+        }
+
+        [Required]
+        [StringLength(20)]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Phone]
+        [Display(Name = "Phone Number")]
+        public string? PhoneNumber { get; set; }
+
+        [StringLength(7, ErrorMessage = "Postal code must be in the form xxx-xxx")]
+        [MinLength(7, ErrorMessage = "Postal code must be in the form xxx-xxx"))]
+        [Display(Name = "Postal Code")]
+        public string? PostalCode { get; set; }
+
+
+        public bool Success { get; set; }
+        public string? Message { get; set; }
+
+    }
+}

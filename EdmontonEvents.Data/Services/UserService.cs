@@ -1,4 +1,5 @@
 ﻿using EdmontonEvents.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,9 +14,9 @@ namespace EdmontonEvents.Data.Services
             _context = context;
         }
 
-        public UserAccount? GetUserAccountByName(string name)
+        public async Task<UserAccount?> GetUserAccountByName(string name)
         {
-            return _context.UserAccounts.FirstOrDefault(u => u.Email.Trim().ToLower() == name.Trim().ToLower() && u.IsActive == true);
+            return await _context.UserAccounts.FirstOrDefaultAsync(u => u.Email.Trim().ToLower() == name.Trim().ToLower() && u.IsActive == true);
         }
 
     }

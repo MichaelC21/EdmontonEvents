@@ -75,7 +75,7 @@ namespace EdmontonEvents.Web.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            /// 
+            ///
 
             [Required]
             [Display(Name = "First Name")]
@@ -116,9 +116,10 @@ namespace EdmontonEvents.Web.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-                user.FirstName = Input.FirstName;  
+                user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
                 user.IsActive = true;
+                user.Email = Input.Email;
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -128,7 +129,7 @@ namespace EdmontonEvents.Web.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
-                    
+
                 }
                 foreach (var error in result.Errors)
                 {

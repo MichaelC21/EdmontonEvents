@@ -1,0 +1,58 @@
+﻿@using EdmontonEvents.Web.Models
+@model ProfileDTO
+@{
+    ViewData["Title"] = "Profile";
+    bool displayAlert = !string.IsNullOrEmpty(Model.Message);
+}
+
+@section Styles
+{
+    <link rel="stylesheet" type="text/css" href="~/css/profile.css" asp-append-version="true" />
+}
+
+
+
+<div class="profile-page">
+    <div class="container p-3 profile-card rounded-4">
+        <h1 class="text-dark-teal fw-bold">My Profile</h1>
+        @if (displayAlert)
+        {
+            <div class="alert @(Model.Success ? "alert-success" : "alert-danger")"> @Model.Message</div>
+        }
+        <div class="profile-card-form">
+            <form method="POST" asp-controller="Account" asp-action="Profile">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="FirstName" class="form-control form-control-lg" aria-required="true" required/>
+                    <label asp-for="FirstName" class="required-input">First Name</label>
+                    <span asp-validation-for="FirstName" class="text-danger small"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="LastName" class="form-control form-control-lg" aria-required="true" required/>
+                    <label asp-for="LastName" class="required-input">Last Name</label>
+                    <span asp-validation-for="LastName" class="text-danger small"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Email" class="form-control form-control-lg" type="email" required/>
+                    <label asp-for="Email" class="required-input">Email</label>
+                    <span asp-validation-for="Email" class="text-danger small"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="PhoneNumber" class="form-control form-control-lg" type="number"/>
+                    <label asp-for="PhoneNumber">Phone Number</label>
+                    <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="PostalCode" class="form-control form-control-lg"/>
+                    <label asp-for="PostalCode">Postal Code</label>
+                    <span asp-validation-for="PostalCode" class="text-danger small"></span>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button id="profile-submit" type="submit" class="btn btn-brand btn-lg w-50">
+                        Update
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

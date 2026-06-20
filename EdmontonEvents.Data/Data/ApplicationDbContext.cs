@@ -1,4 +1,5 @@
-﻿using EdmontonEvents.Data.Entities;
+﻿using EdmontonEvents.Data;
+using EdmontonEvents.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
