@@ -18,7 +18,7 @@ namespace EdmontonEvents.Web.Controllers
 
         protected async Task<UserAccount?> GetCurrentUserAccount()
         {
-            return await UserService.GetUserAccountByName(User.Identity.Name);
+            return await UserService.GetUserAccountByUserName(User.Identity.Name);
         }
     }
 }

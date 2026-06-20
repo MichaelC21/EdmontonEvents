@@ -56,6 +56,14 @@ namespace EdmontonEvents.Web.Controllers
                 return Challenge();
             }
 
+            if(!String.IsNullOrEmpty(profile.PostalCode))
+            {
+                if (profile.PostalCode[3] != '-')
+                {
+                    ModelState.AddModelError("PostalCode", "Postal code must be in the form XXX-XXX");
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 try

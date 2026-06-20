@@ -36,8 +36,8 @@ namespace EdmontonEvents.Web.Models
         [Display(Name = "Phone Number")]
         public string? PhoneNumber { get; set; }
 
-        [StringLength(7, ErrorMessage = "Postal code must be in the form xxx-xxx")]
-        [MinLength(7, ErrorMessage = "Postal code must be in the form xxx-xxx"))]
+        [StringLength(7, ErrorMessage = "Postal code must be in the form XXX-XXX")]
+        [MinLength(7, ErrorMessage = "Postal code must be in the form XXX-XXX")]
         [Display(Name = "Postal Code")]
         public string? PostalCode { get; set; }
 

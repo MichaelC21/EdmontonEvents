@@ -14,9 +14,9 @@ namespace EdmontonEvents.Data.Services
             _context = context;
         }
 
-        public async Task<UserAccount?> GetUserAccountByName(string name)
+        public async Task<UserAccount?> GetUserAccountByUserName(string username)
         {
-            return await _context.UserAccounts.FirstOrDefaultAsync(u => u.Email.Trim().ToLower() == name.Trim().ToLower() && u.IsActive == true);
+            return await _context.UserAccounts.FirstOrDefaultAsync(u => (u.UserName != null ? u.UserName.Trim().ToLower() : "") == username.Trim().ToLower() && u.IsActive == true);
         }
 
     }
