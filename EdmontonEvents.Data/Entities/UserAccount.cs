@@ -7,10 +7,15 @@ namespace EdmontonEvents.Data.Entities
 {
     public class UserAccount : IdentityUser
     {
+        public UserAccount()
+        {
+            Events = new List<Event>();
+        }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public bool IsActive { get; set; } = false;
         public string? PostalCode { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
     }
 }
