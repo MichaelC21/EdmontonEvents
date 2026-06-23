@@ -16,7 +16,9 @@ namespace EdmontonEvents.Data.Services
 
         public async Task<UserAccount?> GetUserAccountByUserName(string username)
         {
-            return await _context.UserAccounts.FirstOrDefaultAsync(u => (u.UserName != null ? u.UserName.Trim().ToLower() : "") == username.Trim().ToLower() && u.IsActive == true);
+            return await _context.UserAccounts
+                .Include(u => u.Events)
+                .FirstOrDefaultAsync(u => (u.UserName != null ? u.UserName.Trim().ToLower() : "") == username.Trim().ToLower() && u.IsActive == true);
         }
 
     }

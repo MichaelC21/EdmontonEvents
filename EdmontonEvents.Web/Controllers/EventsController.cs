@@ -28,46 +28,65 @@ namespace EdmontonEvents.Web.Controllers
                 return Challenge();
             }
 
-            ViewData["First Name"] = user.FirstName;
-            ViewData["Last Name"] = user.LastName;
-            return View();
+            EventDTO eventDTO = new EventDTO()
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+            };
+
+            return View(eventDTO);
         }
 
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(EventDTO eventDTO)
         {
+            //The success logic will be replaced with a redirect to the event details page once that is implemented.
             var user = await GetCurrentUserAccount();
             if (user == null)
             {
                 return Challenge();
             }
-
-            Event newEvent = new Event
+            if (ModelState.IsValid)
             {
-                UserID = user.Id,
-                OrganizerFirstName = eventDTO.FirstName,
-                OrganizerLastName = eventDTO.LastName,
-                Title = eventDTO.Title,
-                Description = eventDTO.Description,
-                StartUtc = eventDTO.EventStartDate.ToUniversalTime(),
-                EndUtc = eventDTO.EventEndDate?.ToUniversalTime(),
-                Location = eventDTO.Location,
-                Status = EventStatus.Published,
-                ExternalUrl = eventDTO.ExternalUrl,
-                ImageUrl = eventDTO.ImageUrl,
-                EventCategory = eventDTO.EventCategory,
-                Price = eventDTO.Price,
-                CreatedAtUtc = DateTime.UtcNow,
-                UpdatedAtUtc = DateTime.UtcNow,
-            };
+                try
+                {
+                    Event newEvent = new Event
+                    {
+                        UserID = user.Id,
+                        OrganizerFirstName = eventDTO.FirstName,
+                        OrganizerLastName = eventDTO.LastName,
+                        Title = eventDTO.Title,
+                        Description = eventDTO.Description,
+                        StartUtc = eventDTO.EventStartDate.ToUniversalTime(),
+                        EndUtc = eventDTO.EventEndDate?.ToUniversalTime(),
+                        Location = eventDTO.Location,
+                        Status = EventStatus.Published,
+                        ExternalUrl = eventDTO.ExternalUrl,
+                        ImageUrl = eventDTO.ImageUrl,
+                        EventCategory = eventDTO.EventCategory,
+                        Price = eventDTO.Price,
+                        CreatedAtUtc = DateTime.UtcNow,
+                        UpdatedAtUtc = DateTime.UtcNow,
+                    };
 
-            Context.Events.Add(newEvent);
-            user.Events.Add(newEvent);
+                    Context.Events.Add(newEvent);
+                    user.Events.Add(newEvent);
+                    await Context.SaveChangesAsync();
 
-            await Context.SaveChangesAsync();
+                    eventDTO.FormResult.Success = true;
+                    eventDTO.FormResult.Message = "Event created successfully.";
 
+                } catch (Exception e)
+                {
+                    //Need to log exception
+                    eventDTO.FormResult.Success = false;
+                    eventDTO.FormResult.Message = "An error occurred while creating the event.";
+                }
+
+            }
             return View(eventDTO);
         }
     }
 }
+

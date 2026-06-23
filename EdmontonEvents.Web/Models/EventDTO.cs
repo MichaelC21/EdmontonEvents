@@ -6,6 +6,12 @@ namespace EdmontonEvents.Web.Models
 {
     public class EventDTO
     {
+        public EventDTO()
+        {
+            FormResult = new FormResult();
+        }
+
+
         [Display(Name = "First Name")]
         [StringLength(20)]
         [Required]
@@ -30,7 +36,7 @@ namespace EdmontonEvents.Web.Models
         public DateTime? EventEndDate { get; set; }
 
         [Display(Name = "Time zone")]
-        public string TimeZone { get; set; }
+        public string? TimeZone { get; set; }
 
         [Display(Name = "Event Type")]
         public bool isInPerson { get; set; }
@@ -60,6 +66,8 @@ namespace EdmontonEvents.Web.Models
         [Range(0, 99999999.99)]
         [DataType(DataType.Currency)]
         public decimal? Price { get; set; }
+
+        public FormResult FormResult { get; set; }
 
     }
 }

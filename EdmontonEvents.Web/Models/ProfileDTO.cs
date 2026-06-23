@@ -7,6 +7,7 @@ namespace EdmontonEvents.Web.Models
     {
         public ProfileDTO()
         {
+            FormResult = new FormResult();
         }
 
         public ProfileDTO(UserAccount user)
@@ -16,6 +17,7 @@ namespace EdmontonEvents.Web.Models
             Email = user.Email;
             PhoneNumber = user.PhoneNumber ?? "";
             PostalCode = user.PostalCode ?? "";
+            FormResult = new FormResult();
         }
 
         [Required]
@@ -41,9 +43,7 @@ namespace EdmontonEvents.Web.Models
         [Display(Name = "Postal Code")]
         public string? PostalCode { get; set; }
 
-
-        public bool Success { get; set; }
-        public string? Message { get; set; }
+        public FormResult FormResult { get; set; }
 
     }
 }
