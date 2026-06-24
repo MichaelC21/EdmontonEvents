@@ -17,6 +17,7 @@ builder.Services.AddDefaultIdentity<UserAccount>(options => options.SignIn.Requi
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IEventService, EventService>();
 
 builder.Services.AddControllersWithViews();
 

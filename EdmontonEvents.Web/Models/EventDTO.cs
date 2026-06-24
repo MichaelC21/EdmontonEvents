@@ -1,4 +1,5 @@
-﻿using EdmontonEvents.Data.Models;
+﻿using EdmontonEvents.Data.Entities;
+using EdmontonEvents.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,6 +10,21 @@ namespace EdmontonEvents.Web.Models
         public EventDTO()
         {
             FormResult = new FormResult();
+        }
+
+        public EventDTO(Event eventEntity)
+        {
+            FirstName = eventEntity.OrganizerFirstName;
+            LastName = eventEntity.OrganizerLastName;
+            Title = eventEntity.Title;
+            EventStartDate = eventEntity.StartUtc;
+            EventEndDate = eventEntity.EndUtc;
+            ImageUrl = eventEntity.ImageUrl;
+            ExternalUrl = eventEntity.ExternalUrl;
+            Description = eventEntity.Description;
+            EventCategory = eventEntity.EventCategory;
+            Location = eventEntity.Location;
+            Price = eventEntity.Price;
         }
 
 
