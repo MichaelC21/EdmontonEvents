@@ -1,0 +1,122 @@
+﻿@using EdmontonEvents.Web.Models
+@using EdmontonEvents.Data.Models
+@using EdmontonEvents.Data.Extensions
+
+
+@model EventDTO
+
+@{
+    ViewData["Title"] = "Create Event";
+    bool displayAlert = !string.IsNullOrEmpty(Model.FormResult.Message);
+
+}
+
+<div class="page-container">
+    <div class="container p-3 page-card rounded-4">
+        <h1 class="page-card-heading">Create Event</h1>
+        <p class="page-card-subheadeing">Create Event subheading</p>
+        @if (displayAlert)
+        {
+            <div class="alert @(Model.FormResult.Success ? "alert-success" : "alert-danger")">@Model.FormResult.Message</div>
+        }
+        <form asp-controller="Events" asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2" role="alert"></div>
+            <div class="p-5 border-2 border-black">
+                PlaceHolder for future image uploads
+            </div>
+            <p class="text-celadon fw-bold text-decoration-underline fs-4">Event Organizer</p>
+            <div class="d-flex gap-3 justify-content-center">
+                <div class="form-floating mb-3 flex-grow-1">
+                    <input asp-for="FirstName" class="form-control form-control-lg" aria-required="true" value="@Model.FirstName" required />
+                    <label asp-for="FirstName" class="required-input"></label>
+                    <span asp-validation-for="FirstName" class="text-danger small"></span>
+                </div>
+                <div class="form-floating mb-3 flex-grow-1">
+                    <input asp-for="LastName" class="form-control form-control-lg" aria-required="true" value="@Model.LastName" required />
+                    <label asp-for="LastName" class="required-input"></label>
+                    <span asp-validation-for="LastName" class="text-danger small"></span>
+                </div>
+            </div>
+            <p class="text-celadon fw-bold text-decoration-underline fs-4">General Event Information</p>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Title" class="form-control form-control-lg" aria-required="true" required />
+                <label asp-for="Title" class="required-input"></label>
+                <span asp-validation-for="Title" class="text-danger small"></span>
+            </div>
+
+            <div class="d-flex gap-3 justify-content-center">
+                <div class="form-floating mb-3 flex-grow-1">
+                    <input asp-for="EventStartDate" type="datetime-local" class="form-control form-control-lg" aria-required="true" required />
+                    <label asp-for="EventStartDate" class="required-input"></label>
+                    <span asp-validation-for="EventStartDate" class="text-danger small"></span>
+                </div>
+                <div class="form-floating mb-3 flex-grow-1">
+                    <input asp-for="EventEndDate" type="datetime-local" class="form-control form-control-lg" />
+                    <label asp-for="EventEndDate" class=""></label>
+                    <span asp-validation-for="EventEndDate" class="text-danger small"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="TimeZone" class="form-control form-control-lg"  />
+                    <label asp-for="TimeZone" class=""></label>
+                    <span asp-validation-for="TimeZone" class="text-danger small"></span>
+                </div>
+            </div>
+
+            <div class="d-flex gap-3 justify-content-center">
+                <div class="form-floating mb-3 flex-grow-1">
+                    <select asp-for="isInPerson" class="form-control form-select" aria-required="true" required>
+                        <option value="true">In Person</option>
+                        <option value="false">Online</option>
+                    </select>
+                    <label asp-for="isInPerson" class="required-input"></label>
+                    <span asp-validation-for="isInPerson" class="text-danger small"></span>
+                </div>
+                <div class="form-floating mb-3 flex-grow-1">
+                    <input asp-for="Location" class="form-control form-control-lg" aria-required="true" required />
+                    <label asp-for="Location" class="required-input"></label>
+                    <span asp-validation-for="Location" class="text-danger small"></span>
+                </div>
+            </div>
+
+            <div class="mb-3 flex-grow-1">
+                <label asp-for="Description" class=""></label>
+                <textarea asp-for="Description" class="form-control form-control-lg" style="height: 300px"></textarea>
+                <span asp-validation-for="Description" class="text-danger small"></span>
+            </div>
+
+            <p class="text-celadon fw-bold text-decoration-underline fs-5">Additional Details</p>
+            <div class="d-flex gap-3 justify-content-center">
+                <div class="form-floating mb-3 flex-grow-1">
+                    <select asp-for="EventCategory" class="form-control form-select" aria-required="true" required>
+                        @foreach (EventCategory category in Enum.GetValues<EventCategory>())
+                        {
+                            <option value="@category.ToString()">@category.GetDisplayName()</option>
+                        }
+                    </select>
+                    <label asp-for="EventCategory" class="required-input"></label>
+                    <span asp-validation-for="EventCategory" class="text-danger small"></span>
+                </div>
+                <div class="form-floating mb-3 flex-grow-1">
+                    <input asp-for="ExternalUrl" type="url" class="form-control form-control-lg" />
+                    <label asp-for="ExternalUrl" class=""></label>
+                    <span asp-validation-for="ExternalUrl" class="text-danger small"></span>
+                </div>
+            </div>
+
+
+            <div class="form-floating flex-grow-1 mb-3">
+                <input asp-for="Price" type="number" step="0.01" min="0" class="form-control form-control-lg" />
+                <label asp-for="Price" class=""></label>
+                <span asp-validation-for="Price" class="text-danger small"></span>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <button id="event-submit" type="submit" class="btn btn-brand btn-lg w-50">
+                    Create Event
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

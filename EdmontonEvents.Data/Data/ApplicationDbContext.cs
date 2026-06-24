@@ -9,7 +9,6 @@ namespace EdmontonEvents.Data;
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<UserAccount>(options)
 {
     public DbSet<Event> Events => Set<Event>();
-    public DbSet<Category> Categories => Set<Category>();
     public DbSet<Location> Locations => Set<Location>();
     public DbSet<UserAccount> UserAccounts => Set<UserAccount>();
 
@@ -22,10 +21,6 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 
         builder.Entity<Event>(entity =>
         {
-            entity.HasOne(e => e.Category)
-                .WithMany(c => c.Events)
-                .HasForeignKey(e => e.CategoryID)
-                .OnDelete(DeleteBehavior.SetNull);
 
             entity.HasOne(e => e.EventLocation)
                 .WithMany(l => l.Events)

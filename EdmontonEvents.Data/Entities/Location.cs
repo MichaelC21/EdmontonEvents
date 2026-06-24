@@ -7,16 +7,16 @@ public class Location
 {
     [Key]
     public int LocationID { get; set; }
-    
+
     [StringLength(200)]
     public required string Name { get; set; }
-    
+
     [StringLength(200)]
     public string? AddressLine1 { get; set; }
 
     [StringLength(200)]
     public string? AddressLine2 { get; set; }
-    
+
     [Required]
     [StringLength(200)]
     public string City { get; set; } = "Edmonton";

@@ -76,15 +76,15 @@ namespace EdmontonEvents.Web.Controllers
 
                     await Context.SaveChangesAsync();
 
-                    profile.Success = true;
-                    profile.Message = "Profile updated!";
+                    profile.FormResult.Success = true;
+                    profile.FormResult.Message = "Profile updated!";
                 }
                 catch (Exception e)
                 {
                     //Implement a logger
                     ViewData["Message"] = new { msg = "Something went wrong please try again.", success = false };
-                    profile.Success = false;
-                    profile.Message= "Something went wrong please try again.";
+                    profile.FormResult.Success = false;
+                    profile.FormResult.Message = "Something went wrong please try again.";
                 }
             }
             return View(profile);

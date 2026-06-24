@@ -2,7 +2,7 @@
 @model ProfileDTO
 @{
     ViewData["Title"] = "Profile";
-    bool displayAlert = !string.IsNullOrEmpty(Model.Message);
+    bool displayAlert = !string.IsNullOrEmpty(Model.FormResult.Message);
 }
 
 @section Styles
@@ -12,14 +12,14 @@
 
 
 
-<div class="profile-page">
-    <div class="container p-3 profile-card rounded-4">
+<div class="page-container">
+    <div class="container p-3 page-card rounded-4">
         <h1 class="text-dark-teal fw-bold">My Profile</h1>
         @if (displayAlert)
         {
-            <div class="alert @(Model.Success ? "alert-success" : "alert-danger")">@Model.Message</div>
+            <div class="alert @(Model.FormResult.Success ? "alert-success" : "alert-danger")">@Model.FormResult.Message</div>
         }
-        <div class="profile-card-form">
+        <div class="page-card-form">
             <form method="POST" asp-controller="Account" asp-action="Profile">
                 <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2" role="alert"></div>
                 <div class="form-floating mb-3">
