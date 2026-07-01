@@ -17,10 +17,19 @@ namespace EdmontonEvents.Web.Controllers
         {
             _eventService = eventService;
         }
+
         public IActionResult Index()
         {
-            return View();
+            var events = _eventService.GetEvents().Result;
+            List<EventDTO> eventDTOs = new List<EventDTO>();
+            foreach (var e in events)
+            {
+                eventDTOs.Add(new EventDTO(e));
+            }
+            return View(eventDTOs);
         }
+
+
 
         [Authorize]
         public async Task<IActionResult> Create()
