@@ -20,5 +20,10 @@ namespace EdmontonEvents.Data.Services
         {
             return await _context.Events.FirstOrDefaultAsync(e => e.EventID == id && e.Status == EventStatus.Published);
         }
+
+        public async Task<List<Event>> GetEvents()
+        {
+            return await _context.Events.ToListAsync();
+        }
     }
 }

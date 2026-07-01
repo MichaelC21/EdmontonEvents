@@ -8,5 +8,6 @@ namespace EdmontonEvents.Data.Services
     public interface IEventService
     {
         Task<Event?> GetEventByID(int id);
+        Task<List<Event>> GetEvents();
     }
 }

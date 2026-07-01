@@ -11,8 +11,8 @@
                 <h3 class="display-4 fw-bold mb-3">Find local events happening around the city.</h3>
                 <p class="lead mb-4">Browse festivals, markets, concerts, workshops, and community gatherings in one place.</p>
                 <div class="d-flex flex-wrap gap-3">
-                    <a class="btn btn-lg fw-semibold" href="#featured-events" style="background-color: var(--celadon); color: var(--dark-teal);">Explore Events</a>
-                    <a class="btn btn-lg btn-outline-light" href="#submit-event">Submit an Event</a>
+                    <a class="btn btn-lg fw-semibold" style="background-color: var(--celadon); color: var(--dark-teal);" asp-controller="Events" asp-action="Index">Explore Events</a>
+                    <a class="btn btn-lg btn-outline-light" asp-controller="Events" asp-action="Create">Submit an Event</a>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
                 <p class="text-uppercase fw-semibold mb-1" style="letter-spacing: .1rem; color: var(--sea-green);">What's on</p>
                 <h2 class="fw-bold text-dark-teal mb-0">Featured events</h2>
             </div>
-            <a href="#" class="fw-semibold text-sea-green">View all events</a>
+            <a class="fw-semibold text-sea-green" asp-controller="Events" asp-action="Index">View all events</a>
         </div>
 
         <div class="row g-4">

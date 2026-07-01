@@ -25,6 +25,7 @@ namespace EdmontonEvents.Web.Models
             EventCategory = eventEntity.EventCategory;
             Location = eventEntity.Location;
             Price = eventEntity.Price;
+            EventID = eventEntity.EventID;
         }
 
 
@@ -82,6 +83,8 @@ namespace EdmontonEvents.Web.Models
         [Range(0, 99999999.99)]
         [DataType(DataType.Currency)]
         public decimal? Price { get; set; }
+
+        public int EventID { get; set; }
 
         public FormResult FormResult { get; set; }
 
