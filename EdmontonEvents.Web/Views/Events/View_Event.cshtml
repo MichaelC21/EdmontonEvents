@@ -1,0 +1,108 @@
+﻿@using EdmontonEvents.Web.Models
+@using EdmontonEvents.Data.Extensions
+@model EventDTO
+
+@{
+    ViewData["Title"] = "Event Details";
+    var eventCategoryName = Model.EventCategory.GetDisplayName();
+    var startDate = Model.EventStartDate.ToString("dddd, MMMM d, yyyy");
+    var startTime = Model.EventStartDate.ToString("h:mm tt");
+    var endTime = Model.EventEndDate.HasValue ? Model.EventEndDate.Value.ToString("h:mm tt") : string.Empty;
+    var priceLabel = Model.Price.HasValue && Model.Price.Value > 0 ? Model.Price.Value.ToString("C") : "Free";
+    var locationLabel = Model.isInPerson ? (string.IsNullOrWhiteSpace(Model.Location) ? "TBD" : Model.Location) : "Online event";
+    var hasImage = !string.IsNullOrWhiteSpace(Model.ImageUrl);
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/event.css" />
+}
+
+<div class="page-container">
+    <div class="page-card event-details-card rounded-4">
+        <div class="event-hero @(hasImage ? string.Empty : "event-hero-placeholder")" style="@(hasImage ? $"background-image:url('{Model.ImageUrl}');" : string.Empty)">
+
+        </div>
+        <div class="p-4 p-md-5">
+            <div class="mb-4">
+                <h1 class="display-5 fw-bold text-dark-teal">@Model.Title</h1>
+                <p class="fs-4 lead mb-1 text-sea-green fw-semibold">Hosted by @Model.FirstName @Model.LastName</p>
+                <p class="fs-5 text-celadon fw-bold small mb-0">
+                    @startDate &middot; @startTime
+                    @if (!string.IsNullOrEmpty(endTime))
+                    {
+                        <span>&ndash; @endTime</span>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.TimeZone))
+                    {
+                        <span class="mx-2">&bull;</span>
+                        @Model.TimeZone
+                    }
+                </p>
+            </div>
+            <div class="row gx-4 gy-4">
+                <div class="col-lg-7">
+                    <div class="mb-4">
+                        <h2 class="page-card-heading fs-4">About this event</h2>
+                        <p class="fs-6 text-secondary mb-0">@(!string.IsNullOrWhiteSpace(Model.Description) ? Model.Description : "No description is available for this event.")</p>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-sm-2 g-3">
+                        <div class="col">
+                            <div class="p-3 border rounded-4 h-100 bg-light">
+                                <h3 class="fs-6 text-dark-teal mb-2">Location</h3>
+                                <p class="mb-0">@locationLabel</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="p-3 border rounded-4 h-100 bg-light">
+                                <h3 class="fs-6 text-dark-teal mb-2">Price</h3>
+                                <p class="mb-0">@priceLabel</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="p-3 border rounded-4 h-100 bg-light">
+                                <h3 class="fs-6 text-dark-teal mb-2">Format</h3>
+                                <p class="mb-0">@(Model.isInPerson ? "In person" : "Online")</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="p-3 border rounded-4 h-100 bg-light">
+                                <h3 class="fs-6 text-dark-teal mb-2">Organizer</h3>
+                                <p class="mb-0">@Model.FirstName @Model.LastName</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="p-4 rounded-4 bg-sea-green bg-opacity-10 border border-sea-green h-100">
+                        <h3 class="fs-5 text-dark-teal mb-4">Event details</h3>
+                        <dl class="row event-details-list">
+                            <dt class="col-5">Category</dt>
+                            <dd class="col-7">@eventCategoryName</dd>
+
+                            <dt class="col-5">When</dt>
+                            <dd class="col-7">@startDate<br />@startTime @if (!string.IsNullOrEmpty(endTime)) { <span>&ndash; @endTime</span> }</dd>
+
+                            <dt class="col-5">Time zone</dt>
+                            <dd class="col-7">@(!string.IsNullOrWhiteSpace(Model.TimeZone) ? Model.TimeZone : "UTC")</dd>
+
+                            <dt class="col-5">Location</dt>
+                            <dd class="col-7">@locationLabel</dd>
+
+                            <dt class="col-5">Price</dt>
+                            <dd class="col-7">@priceLabel</dd>
+                        </dl>
+
+                        @if (!string.IsNullOrWhiteSpace(Model.ExternalUrl))
+                        {
+                            <div class="mt-4 d-grid">
+                                <a href="@Model.ExternalUrl" target="_blank" rel="noopener noreferrer" class="btn btn-brand btn-lg">Visit event page</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

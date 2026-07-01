@@ -1,0 +1,35 @@
+﻿.event-details-card {
+    overflow: hidden;
+}
+
+.event-hero {
+    min-height: 18rem;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.event-hero-placeholder {
+    background: linear-gradient(135deg, rgba(17, 75, 95, .95), rgba(136, 212, 152, .85));
+}
+
+.event-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .55) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: .75rem;
+    padding: 2rem;
+}
+
+.event-details-list dt {
+    font-weight: 700;
+    color: var(--dark-teal);
+}
+
+.event-details-list dd {
+    margin-bottom: 1rem;
+    color: #3d525a;
+}

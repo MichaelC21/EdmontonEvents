@@ -10,9 +10,12 @@ namespace EdmontonEvents.Web.Controllers
 {
     public class EventsController : BaseController
     {
-        public EventsController(ApplicationDbContext context, IUserService userService)
+        private readonly IEventService _eventService;
+
+        public EventsController(ApplicationDbContext context, IUserService userService, IEventService eventService)
             : base(context, userService)
         {
+            _eventService = eventService;
         }
         public IActionResult Index()
         {
@@ -85,6 +88,23 @@ namespace EdmontonEvents.Web.Controllers
                 }
 
             }
+            return View(eventDTO);
+        }
+
+        public async Task<IActionResult> View_Event(int id)
+        {
+            if (id == 0)
+            {
+                return RedirectToAction("Index", "Events");
+            }
+            var e = await _eventService.GetEventByID(id);
+            if (e == null)
+            {
+                return NotFound();
+            }
+
+            EventDTO eventDTO = new EventDTO(e);
+
             return View(eventDTO);
         }
     }
